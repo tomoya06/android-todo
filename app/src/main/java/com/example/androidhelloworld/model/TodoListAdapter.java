@@ -1,10 +1,15 @@
 package com.example.androidhelloworld.model;
 
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.androidhelloworld.R;
 
 import java.util.List;
 
@@ -17,8 +22,8 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoLi
   @NonNull
   @Override
   public TodoListItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-    TextView tv = new TextView(parent.getContext());
-    return new TodoListItemViewHolder(tv);
+    View view = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
+    return new TodoListItemViewHolder(view);
   }
 
   @Override
@@ -31,12 +36,33 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.TodoLi
     return todoList.size();
   }
 
-  public static class TodoListItemViewHolder extends RecyclerView.ViewHolder {
-    public TextView contentTv;
+  @Override
+  public int getItemViewType(int position) {
+    return R.layout.todo_listitem;
+  }
 
-    public TodoListItemViewHolder(TextView textView) {
-      super(textView);
-      contentTv = textView;
+  class TodoListItemViewHolder extends RecyclerView.ViewHolder {
+    TextView contentTv;
+    Button removeBtn;
+    Button editBtn;
+
+    TodoListItemViewHolder(View view) {
+      super(view);
+      contentTv = view.findViewById(R.id.todoListItemContentTv);
+      removeBtn = view.findViewById(R.id.todoListItemRemoveBtn);
+      editBtn = view.findViewById(R.id.todoListItemEditBtn);
+
+      initView();
+    }
+
+    private void initView() {
+      removeBtn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          int position = getAdapterPosition();
+          todoList.remove(position);
+        }
+      });
     }
   }
 }

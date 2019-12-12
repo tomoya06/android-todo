@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         String newTodo = createEt.getText().toString();
+
         todoList.add(new Todo(newTodo));
         todoListAdapter.notifyItemInserted(todoList.size());
         createEt.setText("");
