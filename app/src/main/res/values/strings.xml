@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TO-DO</string>
+    <string name="submit_button_text">Submit</string>
+    <string name="newTodo_text_hint">Create a new to-do</string>
+</resources>
