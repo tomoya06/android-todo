@@ -24,7 +24,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-        <ListView
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/todoListRv"
+                android:scrollbars="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
     </LinearLayout>
